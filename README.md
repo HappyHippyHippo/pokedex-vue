@@ -1,4 +1,4 @@
-# Tutorial criação de Pokédex (HTML/CSS/JS) - Vue twits
+# Tutorial criação de Pokédex (HTML/CSS/JS) - Vue twist
 
 <img src="./images/exemplo-image.png" alt="exemplo imagem">
 
