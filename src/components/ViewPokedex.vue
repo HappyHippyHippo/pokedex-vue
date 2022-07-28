@@ -31,9 +31,12 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapGetters } from "vuex";
+import { PokeAPI } from "@/apis/pokeapi";
+
 export default {
   name: "ViewPokedex",
+  api: null,
   data: function () {
     return {
       id: "",
@@ -41,7 +44,7 @@ export default {
   },
   computed: {
     pokemonId: function () {
-      return this.getPokemonID();
+      return this.getPokemonId();
     },
     pokemonName: function () {
       return this.getPokemonName();
@@ -50,27 +53,27 @@ export default {
       return this.getPokemonImage();
     },
   },
+  created() {
+    this.api = new PokeAPI(this.$store);
+  },
   mounted() {
-    this.$store.dispatch("loadPokemon", 1);
+    this.api.get(1);
   },
   methods: {
-    ...mapActions({
-      loadPokemon: "loadPokemon",
-    }),
     ...mapGetters({
-      getPokemonID: "getPokemonID",
-      getPokemonName: "getPokemonName",
-      getPokemonImage: "getPokemonImage",
+      getPokemonId: "pokemonId",
+      getPokemonName: "pokemonName",
+      getPokemonImage: "pokemonImage",
     }),
     decrementPokemon() {
-      this.$store.dispatch("decrementPokemon");
+      this.api.decrement();
     },
     incrementPokemon() {
-      this.$store.dispatch("incrementPokemon");
+      this.api.increment();
     },
     requestPokemon(event) {
-      this.$store.dispatch("loadPokemon", this.id);
       event.preventDefault();
+      this.api.get(this.id.toLowerCase());
       this.id = "";
     },
   },

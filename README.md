@@ -9,4 +9,6 @@
 
 Todos os créditos para o canal - **Manual do Dev**
 
-Adenddum : criado em vue para relembrar conhecimento
+### Addendum
+- criado em vue para relembrar conhecimento
+- adicionado axios em classe separada para separação de responsabilidades
